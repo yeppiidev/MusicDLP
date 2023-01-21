@@ -37,8 +37,6 @@ namespace MusicDLP
         }
 
         public void PreToolDownloadTasks() {
-            throw new NullReferenceException();
-
             btnCancel.Enabled = false;
             btnOK.Enabled = false;
             downloadInProgress = true;
