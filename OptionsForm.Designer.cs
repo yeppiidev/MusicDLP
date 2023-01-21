@@ -31,6 +31,7 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.tabControlOptions = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.cbShowDownloadOutput = new System.Windows.Forms.CheckBox();
             this.cbClearPreviousOutput = new System.Windows.Forms.CheckBox();
             this.cbShowOutputConsole = new System.Windows.Forms.CheckBox();
             this.tabAdditionalTools = new System.Windows.Forms.TabPage();
@@ -41,7 +42,7 @@
             this.btnDownloadYtdlp = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.cbShowDownloadOutput = new System.Windows.Forms.CheckBox();
+            this.btnRemoveYtdlp = new System.Windows.Forms.Button();
             this.tabControlOptions.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.tabAdditionalTools.SuspendLayout();
@@ -83,6 +84,16 @@
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
             // 
+            // cbShowDownloadOutput
+            // 
+            this.cbShowDownloadOutput.AutoSize = true;
+            this.cbShowDownloadOutput.Location = new System.Drawing.Point(8, 54);
+            this.cbShowDownloadOutput.Name = "cbShowDownloadOutput";
+            this.cbShowDownloadOutput.Size = new System.Drawing.Size(289, 17);
+            this.cbShowDownloadOutput.TabIndex = 2;
+            this.cbShowDownloadOutput.Text = "Show the output folder after a download task completes";
+            this.cbShowDownloadOutput.UseVisualStyleBackColor = true;
+            // 
             // cbClearPreviousOutput
             // 
             this.cbClearPreviousOutput.AutoSize = true;
@@ -105,6 +116,7 @@
             // 
             // tabAdditionalTools
             // 
+            this.tabAdditionalTools.Controls.Add(this.btnRemoveYtdlp);
             this.tabAdditionalTools.Controls.Add(this.lblSeperator);
             this.tabAdditionalTools.Controls.Add(this.downloadProgress);
             this.tabAdditionalTools.Controls.Add(this.lblYtdlpInstalled);
@@ -196,15 +208,16 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // cbShowDownloadOutput
+            // btnRemoveYtdlp
             // 
-            this.cbShowDownloadOutput.AutoSize = true;
-            this.cbShowDownloadOutput.Location = new System.Drawing.Point(8, 54);
-            this.cbShowDownloadOutput.Name = "cbShowDownloadOutput";
-            this.cbShowDownloadOutput.Size = new System.Drawing.Size(289, 17);
-            this.cbShowDownloadOutput.TabIndex = 2;
-            this.cbShowDownloadOutput.Text = "Show the output folder after a download task completes";
-            this.cbShowDownloadOutput.UseVisualStyleBackColor = true;
+            this.btnRemoveYtdlp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveYtdlp.Location = new System.Drawing.Point(351, 11);
+            this.btnRemoveYtdlp.Name = "btnRemoveYtdlp";
+            this.btnRemoveYtdlp.Size = new System.Drawing.Size(67, 23);
+            this.btnRemoveYtdlp.TabIndex = 6;
+            this.btnRemoveYtdlp.Text = "Remove";
+            this.btnRemoveYtdlp.UseVisualStyleBackColor = true;
+            this.btnRemoveYtdlp.Click += new System.EventHandler(this.btnRemoveYtdlp_Click);
             // 
             // OptionsForm
             // 
@@ -212,6 +225,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(549, 392);
+            this.ControlBox = false;
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.tabControlOptions);
@@ -223,6 +237,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Options...";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsForm_FormClosing);
             this.Load += new System.EventHandler(this.OptionsForm_Load);
             this.tabControlOptions.ResumeLayout(false);
             this.tabGeneral.ResumeLayout(false);
@@ -250,5 +265,6 @@
         private System.Windows.Forms.CheckBox cbShowOutputConsole;
         private System.Windows.Forms.CheckBox cbClearPreviousOutput;
         private System.Windows.Forms.CheckBox cbShowDownloadOutput;
+        private System.Windows.Forms.Button btnRemoveYtdlp;
     }
 }

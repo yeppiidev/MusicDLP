@@ -15,6 +15,7 @@ namespace MusicDLP
 {
     public partial class OptionsForm : Form
     {
+        private bool downloadInProgress = false;
 
         public OptionsForm()
         {
@@ -36,20 +37,29 @@ namespace MusicDLP
         }
 
         public void PreToolDownloadTasks() {
+            throw new NullReferenceException();
+
             btnCancel.Enabled = false;
             btnOK.Enabled = false;
+            downloadInProgress = true;
+
+            DialogResult = DialogResult.None;
         }
 
         public void PostToolDownloadTasks() {
             btnCancel.Enabled = true;
             btnOK.Enabled = true;
+            downloadInProgress = false;
+
+            btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.ytdlpPath);
         }
 
         private void OptionsForm_Load(object sender, EventArgs e)
         {
-            lblYtdlpInstalled.Text = File.Exists(GlobalHelpers.applicationDownloadPath + "\\yt-dlp.exe") 
+            lblYtdlpInstalled.Text = File.Exists(GlobalHelpers.ytdlpPath) 
                 ? "Installed!" 
                 : "Not installed!";
+            btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.ytdlpPath);
 
             downloadProgress.Visible = false;
 
@@ -128,6 +138,16 @@ namespace MusicDLP
 
         private void btnOK_Click(object sender, EventArgs e) {
             SaveAllSettings();
+        }
+
+        private void btnRemoveYtdlp_Click(object sender, EventArgs e) {
+            File.Delete(GlobalHelpers.ytdlpPath);
+
+            btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.ytdlpPath);
+        }
+
+        private void OptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
+            if (downloadInProgress) e.Cancel = true;
         }
     }
 }
