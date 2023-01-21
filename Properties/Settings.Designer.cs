@@ -46,5 +46,17 @@ namespace MusicDLP.Properties {
                 this["clearPreviousOutput"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool showDownloadOutput {
+            get {
+                return ((bool)(this["showDownloadOutput"]));
+            }
+            set {
+                this["showDownloadOutput"] = value;
+            }
+        }
     }
 }
