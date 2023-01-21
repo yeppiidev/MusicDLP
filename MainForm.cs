@@ -1,34 +1,26 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Forms.Application;
 
-namespace MusicDLP
-{
+namespace MusicDLP {
     public partial class MainForm : Form
     {
-        public String initialDownloadLocation = Environment.ExpandEnvironmentVariables("%USERPROFILE%\\Music");
+        public string InitialDownloadLocation;
 
         public MainForm()
         {
             InitializeComponent();
 
-            txtDownloadFolder.Text = initialDownloadLocation;
+            InitialDownloadLocation = GlobalHelpers.GetLastDownloadFolderLocation();
+
+            txtDownloadFolder.Text = InitialDownloadLocation;
             downloadProgress.Visible = false;
             rtbOutput.Height += downloadProgress.Height;
-
         }
 
         public void PreDownloadTasks() {
@@ -56,7 +48,7 @@ namespace MusicDLP
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            if (!File.Exists(GlobalHelpers.ytdlpPath))
+            if (!File.Exists(GlobalHelpers.YTDLPDownloadPath))
             {
                 MessageBox.Show("Please download yt-dlp from: Options > Additional Tools > Download yt-dlp", "yt-dlp is not installed!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
@@ -66,18 +58,20 @@ namespace MusicDLP
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
             
-            dialog.InitialDirectory = initialDownloadLocation;
+            dialog.InitialDirectory = InitialDownloadLocation;
             dialog.IsFolderPicker = true;
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 txtDownloadFolder.Text = dialog.FileName;
+
+                GlobalHelpers.SetLastDownloadFolderLocation(dialog.FileName);
             }
         }
 
         private void btnStartDownload_Click(object sender, EventArgs e)
         {
-            if (!File.Exists(GlobalHelpers.ytdlpPath))
+            if (!File.Exists(GlobalHelpers.YTDLPDownloadPath))
             {
                 MessageBox.Show("Please download yt-dlp from: Options > Additional Tools > Download yt-dlp", "yt-dlp is not installed!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
@@ -107,7 +101,7 @@ namespace MusicDLP
                     ProcessStartInfo startInfo = new ProcessStartInfo();
 
                     startInfo.CreateNoWindow = !(bool) Properties.Settings.Default["showConsoleOutput"];
-                    startInfo.FileName = GlobalHelpers.ytdlpPath;
+                    startInfo.FileName = GlobalHelpers.YTDLPDownloadPath;
                     startInfo.Arguments = $"{txtUrl.Text} --ignore-errors -f \"bestaudio[ext=m4a]\" --extract-audio --add-metadata --postprocessor-args \"-metadata date='${{year}}' -metadata artist='${{artist}}'\" --embed-thumbnail --ppa \"EmbedThumbnail+ffmpeg_o:-c:v mjpeg -vf crop=\"'if(gt(ih,iw),iw,ih)':'if(gt(iw,ih),ih,iw)'\"\" --convert-thumbnail jpg --parse-metadata \"playlist_index:%(track_number)s\" --parse-metadata \":(?P<webpage_url>)\" --parse-metadata \":(?P<synopsis>)\" --parse-metadata \":(?P<description>)\" -o \"{txtDownloadFolder.Text}\\%(title)s.%(ext)s\"";
                     
                     startInfo.RedirectStandardError = true;
@@ -159,18 +153,19 @@ namespace MusicDLP
             Process.Start("https://github.com/yeppiidev/MusicDLP/");
         }
 
-        protected override void WndProc(ref System.Windows.Forms.Message m) {
+        protected override void WndProc(ref Message msg) {
             const int WM_SYSCOMMAND = 0x0112;
             const int SC_CLOSE = 0xF060;
 
-            if (m.Msg == WM_SYSCOMMAND) // this is sent even if a modal MessageBox is shown
+            if (msg.Msg == WM_SYSCOMMAND) // this is sent even if a modal MessageBox is shown
             {
-                if ((int) m.WParam == SC_CLOSE) {
+                if ((int) msg.WParam == SC_CLOSE) {
                     GlobalHelpers.CloseModalWindows();
                     Close();
                 }
             }
-            base.WndProc(ref m);
+
+            base.WndProc(ref msg);
         }
 
         private void copyLogToolStripMenuItem_Click(object sender, EventArgs e) {

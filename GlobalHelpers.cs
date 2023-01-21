@@ -12,8 +12,8 @@ namespace MusicDLP
 {
     public class GlobalHelpers
     {
-        public static string applicationDownloadPath = Environment.ExpandEnvironmentVariables("%APPDATA%\\MusicDLP\\Tools");
-        public static string ytdlpPath = applicationDownloadPath + "\\yt-dlp.exe";
+        public static string DefaultToolDownloadPath = Environment.ExpandEnvironmentVariables("%APPDATA%\\MusicDLP\\Tools");
+        public static string YTDLPDownloadPath = DefaultToolDownloadPath + "\\yt-dlp.exe";
 
         public static bool ExistsOnPath(string fileName)
         {
@@ -63,6 +63,19 @@ namespace MusicDLP
                         }
                     }
                 }
+            }
+        }
+
+        public static void SetLastDownloadFolderLocation(string newLocation) {
+            Properties.Settings.Default["lastDownloadFolderLocation"] = newLocation;
+            Properties.Settings.Default.Save();
+        }
+
+        public static string GetLastDownloadFolderLocation() {
+            if ((string) Properties.Settings.Default["lastDownloadFolderLocation"] != "") {
+                return (string) Properties.Settings.Default["lastDownloadFolderLocation"];
+            } else {
+                return Environment.ExpandEnvironmentVariables("%USERPROFILE%\\Music");
             }
         }
     }

@@ -15,7 +15,7 @@ namespace MusicDLP
 {
     public partial class OptionsForm : Form
     {
-        private bool downloadInProgress = false;
+        private bool DownloadInProgress = false;
 
         public OptionsForm()
         {
@@ -39,7 +39,7 @@ namespace MusicDLP
         public void PreToolDownloadTasks() {
             btnCancel.Enabled = false;
             btnOK.Enabled = false;
-            downloadInProgress = true;
+            DownloadInProgress = true;
 
             DialogResult = DialogResult.None;
         }
@@ -47,17 +47,17 @@ namespace MusicDLP
         public void PostToolDownloadTasks() {
             btnCancel.Enabled = true;
             btnOK.Enabled = true;
-            downloadInProgress = false;
+            DownloadInProgress = false;
 
-            btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.ytdlpPath);
+            btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.YTDLPDownloadPath);
         }
 
         private void OptionsForm_Load(object sender, EventArgs e)
         {
-            lblYtdlpInstalled.Text = File.Exists(GlobalHelpers.ytdlpPath) 
+            lblYtdlpInstalled.Text = File.Exists(GlobalHelpers.YTDLPDownloadPath) 
                 ? "Installed!" 
                 : "Not installed!";
-            btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.ytdlpPath);
+            btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.YTDLPDownloadPath);
 
             downloadProgress.Visible = false;
 
@@ -87,7 +87,7 @@ namespace MusicDLP
             {
                 PreToolDownloadTasks();
 
-                Directory.CreateDirectory(GlobalHelpers.applicationDownloadPath);
+                Directory.CreateDirectory(GlobalHelpers.DefaultToolDownloadPath);
                 
                 using (WebClient wc = new WebClient())
                 {
@@ -97,7 +97,7 @@ namespace MusicDLP
                         // Param1 = Link of file
                         new Uri(URLConstants.ytdlpDownloadUrl),
                         // Param2 = Path to save
-                        GlobalHelpers.ytdlpPath
+                        GlobalHelpers.YTDLPDownloadPath
                     );
 
                     lblYtdlpInstalled.Text = "Downloading...";
@@ -124,7 +124,7 @@ namespace MusicDLP
 
                 if (result == DialogResult.OK)
                 {
-                    Process.Start("explorer.exe", GlobalHelpers.applicationDownloadPath);
+                    Process.Start("explorer.exe", GlobalHelpers.DefaultToolDownloadPath);
                 }
             }
         }
@@ -139,13 +139,13 @@ namespace MusicDLP
         }
 
         private void btnRemoveYtdlp_Click(object sender, EventArgs e) {
-            File.Delete(GlobalHelpers.ytdlpPath);
+            File.Delete(GlobalHelpers.YTDLPDownloadPath);
 
-            btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.ytdlpPath);
+            btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.YTDLPDownloadPath);
         }
 
         private void OptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
-            if (downloadInProgress) e.Cancel = true;
+            if (DownloadInProgress) e.Cancel = true;
         }
     }
 }

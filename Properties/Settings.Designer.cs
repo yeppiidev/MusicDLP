@@ -58,5 +58,17 @@ namespace MusicDLP.Properties {
                 this["showDownloadOutput"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string lastDownloadFolderLocation {
+            get {
+                return ((string)(this["lastDownloadFolderLocation"]));
+            }
+            set {
+                this["lastDownloadFolderLocation"] = value;
+            }
+        }
     }
 }
