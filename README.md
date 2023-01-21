@@ -15,3 +15,15 @@ A quick and easy yt-dlp frontend (written in WinForms for Windows) for downloadi
 - Paste the URL of the desired video in the URL box
 - Select a folder where the file will be downloaded to
 - Click `Start` to begin the download
+
+# Screenshots
+- Initial window
+
+![image](https://user-images.githubusercontent.com/52355164/213846653-e5504fb6-ef94-4d25-8ee1-757feeb02197.png)
+- After a download task
+
+![image](https://user-images.githubusercontent.com/52355164/213846659-83f42fc4-9e87-438e-9b52-566aacbf75cf.png)
+- Options window
+
+![image](https://user-images.githubusercontent.com/52355164/213846676-ed0a87e2-a61f-4a21-aea7-32ec9edfe9de.png)
+
