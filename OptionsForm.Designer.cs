@@ -31,6 +31,8 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.tabControlOptions = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.cbClearPreviousOutput = new System.Windows.Forms.CheckBox();
+            this.cbShowOutputConsole = new System.Windows.Forms.CheckBox();
             this.tabAdditionalTools = new System.Windows.Forms.TabPage();
             this.lblSeperator = new System.Windows.Forms.Label();
             this.downloadProgress = new System.Windows.Forms.ProgressBar();
@@ -39,8 +41,7 @@
             this.btnDownloadYtdlp = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.cbShowOutputConsole = new System.Windows.Forms.CheckBox();
-            this.cbClearPreviousOutput = new System.Windows.Forms.CheckBox();
+            this.cbShowDownloadOutput = new System.Windows.Forms.CheckBox();
             this.tabControlOptions.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.tabAdditionalTools.SuspendLayout();
@@ -71,6 +72,7 @@
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.cbShowDownloadOutput);
             this.tabGeneral.Controls.Add(this.cbClearPreviousOutput);
             this.tabGeneral.Controls.Add(this.cbShowOutputConsole);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
@@ -80,6 +82,26 @@
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
+            // 
+            // cbClearPreviousOutput
+            // 
+            this.cbClearPreviousOutput.AutoSize = true;
+            this.cbClearPreviousOutput.Location = new System.Drawing.Point(8, 31);
+            this.cbClearPreviousOutput.Name = "cbClearPreviousOutput";
+            this.cbClearPreviousOutput.Size = new System.Drawing.Size(274, 17);
+            this.cbClearPreviousOutput.TabIndex = 1;
+            this.cbClearPreviousOutput.Text = "Clear the output pane before the next download task";
+            this.cbClearPreviousOutput.UseVisualStyleBackColor = true;
+            // 
+            // cbShowOutputConsole
+            // 
+            this.cbShowOutputConsole.AutoSize = true;
+            this.cbShowOutputConsole.Location = new System.Drawing.Point(8, 8);
+            this.cbShowOutputConsole.Name = "cbShowOutputConsole";
+            this.cbShowOutputConsole.Size = new System.Drawing.Size(178, 17);
+            this.cbShowOutputConsole.TabIndex = 0;
+            this.cbShowOutputConsole.Text = "Show the yt-dlp console window";
+            this.cbShowOutputConsole.UseVisualStyleBackColor = true;
             // 
             // tabAdditionalTools
             // 
@@ -174,25 +196,15 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // cbShowOutputConsole
+            // cbShowDownloadOutput
             // 
-            this.cbShowOutputConsole.AutoSize = true;
-            this.cbShowOutputConsole.Location = new System.Drawing.Point(8, 8);
-            this.cbShowOutputConsole.Name = "cbShowOutputConsole";
-            this.cbShowOutputConsole.Size = new System.Drawing.Size(160, 17);
-            this.cbShowOutputConsole.TabIndex = 0;
-            this.cbShowOutputConsole.Text = "Show yt-dlp console output?";
-            this.cbShowOutputConsole.UseVisualStyleBackColor = true;
-            // 
-            // cbClearPreviousOutput
-            // 
-            this.cbClearPreviousOutput.AutoSize = true;
-            this.cbClearPreviousOutput.Location = new System.Drawing.Point(8, 31);
-            this.cbClearPreviousOutput.Name = "cbClearPreviousOutput";
-            this.cbClearPreviousOutput.Size = new System.Drawing.Size(201, 17);
-            this.cbClearPreviousOutput.TabIndex = 1;
-            this.cbClearPreviousOutput.Text = "Clear output pane on next operation?";
-            this.cbClearPreviousOutput.UseVisualStyleBackColor = true;
+            this.cbShowDownloadOutput.AutoSize = true;
+            this.cbShowDownloadOutput.Location = new System.Drawing.Point(8, 54);
+            this.cbShowDownloadOutput.Name = "cbShowDownloadOutput";
+            this.cbShowDownloadOutput.Size = new System.Drawing.Size(289, 17);
+            this.cbShowDownloadOutput.TabIndex = 2;
+            this.cbShowDownloadOutput.Text = "Show the output folder after a download task completes";
+            this.cbShowDownloadOutput.UseVisualStyleBackColor = true;
             // 
             // OptionsForm
             // 
@@ -237,5 +249,6 @@
         private System.Windows.Forms.Label lblSeperator;
         private System.Windows.Forms.CheckBox cbShowOutputConsole;
         private System.Windows.Forms.CheckBox cbClearPreviousOutput;
+        private System.Windows.Forms.CheckBox cbShowDownloadOutput;
     }
 }

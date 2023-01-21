@@ -130,6 +130,9 @@ namespace MusicDLP
                     process.WaitForExit();
 
                     PostDownloadTasks(builder.ToString());
+
+                    if ((bool) Properties.Settings.Default["showDownloadOutput"]) 
+                        Process.Start("explorer.exe", txtDownloadFolder.Text);
                 }
             });
 

@@ -33,6 +33,9 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.gboxMain = new System.Windows.Forms.GroupBox();
             this.rtbOutput = new System.Windows.Forms.RichTextBox();
+            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadProgress = new System.Windows.Forms.ProgressBar();
             this.btnChooseDownloadFolder = new System.Windows.Forms.Button();
             this.lblDownloadFolder = new System.Windows.Forms.Label();
@@ -42,9 +45,6 @@
             this.btnStartDownload = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOptions = new System.Windows.Forms.Button();
-            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copyLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gboxMain.SuspendLayout();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
@@ -99,6 +99,31 @@
             this.rtbOutput.TabIndex = 6;
             this.rtbOutput.Text = "[log start]";
             this.rtbOutput.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtbOutput_LinkClicked);
+            // 
+            // contextMenu
+            // 
+            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyLogToolStripMenuItem,
+            this.clearLogToolStripMenuItem});
+            this.contextMenu.Name = "contextMenu";
+            this.contextMenu.Size = new System.Drawing.Size(199, 48);
+            // 
+            // copyLogToolStripMenuItem
+            // 
+            this.copyLogToolStripMenuItem.Name = "copyLogToolStripMenuItem";
+            this.copyLogToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.copyLogToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.copyLogToolStripMenuItem.Text = "Copy Log";
+            this.copyLogToolStripMenuItem.Click += new System.EventHandler(this.copyLogToolStripMenuItem_Click);
+            // 
+            // clearLogToolStripMenuItem
+            // 
+            this.clearLogToolStripMenuItem.Name = "clearLogToolStripMenuItem";
+            this.clearLogToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.C)));
+            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.clearLogToolStripMenuItem.Text = "Clear Log";
+            this.clearLogToolStripMenuItem.Click += new System.EventHandler(this.clearLogToolStripMenuItem_Click);
             // 
             // downloadProgress
             // 
@@ -192,31 +217,6 @@
             this.btnOptions.UseVisualStyleBackColor = true;
             this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
             // 
-            // contextMenu
-            // 
-            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyLogToolStripMenuItem,
-            this.clearLogToolStripMenuItem});
-            this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(199, 48);
-            // 
-            // copyLogToolStripMenuItem
-            // 
-            this.copyLogToolStripMenuItem.Name = "copyLogToolStripMenuItem";
-            this.copyLogToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyLogToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.copyLogToolStripMenuItem.Text = "Copy Log";
-            this.copyLogToolStripMenuItem.Click += new System.EventHandler(this.copyLogToolStripMenuItem_Click);
-            // 
-            // clearLogToolStripMenuItem
-            // 
-            this.clearLogToolStripMenuItem.Name = "clearLogToolStripMenuItem";
-            this.clearLogToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.C)));
-            this.clearLogToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.clearLogToolStripMenuItem.Text = "Clear Log";
-            this.clearLogToolStripMenuItem.Click += new System.EventHandler(this.clearLogToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -232,7 +232,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(480, 320);
+            this.MinimumSize = new System.Drawing.Size(667, 490);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MusicDLP";

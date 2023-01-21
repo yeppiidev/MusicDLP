@@ -24,13 +24,25 @@ namespace MusicDLP
         public void LoadAllSettings() {
             cbShowOutputConsole.Checked = (bool) Properties.Settings.Default["showConsoleOutput"];
             cbClearPreviousOutput.Checked = (bool) Properties.Settings.Default["clearPreviousOutput"];
+            cbShowDownloadOutput.Checked = (bool) Properties.Settings.Default["showDownloadOutput"];
         }
 
         public void SaveAllSettings() {
             Properties.Settings.Default["showConsoleOutput"] = cbShowOutputConsole.Checked;
             Properties.Settings.Default["clearPreviousOutput"] = cbClearPreviousOutput.Checked;
+            Properties.Settings.Default["showDownloadOutput"] = cbShowDownloadOutput.Checked;
 
             Properties.Settings.Default.Save();
+        }
+
+        public void PreToolDownloadTasks() {
+            btnCancel.Enabled = false;
+            btnOK.Enabled = false;
+        }
+
+        public void PostToolDownloadTasks() {
+            btnCancel.Enabled = true;
+            btnOK.Enabled = true;
         }
 
         private void OptionsForm_Load(object sender, EventArgs e)
@@ -65,8 +77,10 @@ namespace MusicDLP
 
             if (result == DialogResult.Yes)
             {
-                Directory.CreateDirectory(GlobalHelpers.applicationDownloadPath);
+                PreToolDownloadTasks();
 
+                Directory.CreateDirectory(GlobalHelpers.applicationDownloadPath);
+                
                 using (WebClient wc = new WebClient())
                 {
                     wc.DownloadProgressChanged += Wc_DownloadProgressChanged; ;
@@ -86,6 +100,8 @@ namespace MusicDLP
 
         private void Wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
+            PostToolDownloadTasks();
+
             downloadProgress.Visible = false;
 
             if (e.Error != null)
