@@ -19,18 +19,34 @@ namespace MusicDLP {
         public CustomDialogBox(string title, string message) {
             InitializeComponent();
 
-            Text = title;
-            lblTitle.Text = title;
-            lblMessage.Text = message;
+            SetTitleAndMessage(title, message);
+        }
+
+        public CustomDialogBox(string title, string message, bool isProgressDialog) {
+            InitializeComponent();
+
+            SetTitleAndMessage(title, message);
+            SetProgressDialog(isProgressDialog);
         }
 
         public CustomDialogBox(string title, string message, CustomDialogBoxButtons buttons) {
             InitializeComponent();
 
+            SetTitleAndMessage(title, message);
+            SetDefaultButtons(buttons);
+        }
+
+        public void SetTitleAndMessage(string title, string message) {
             Text = title;
             lblTitle.Text = title;
             lblMessage.Text = message;
+        }
 
+        public void SetProgressDialog(bool flag) {
+            progress.Visible = flag;
+        }
+
+        public void SetDefaultButtons(CustomDialogBoxButtons buttons) {
             switch (buttons) {
                 case CustomDialogBoxButtons.YesNo:
                     btnDefault1.Text = "Yes";

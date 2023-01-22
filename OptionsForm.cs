@@ -59,12 +59,10 @@ namespace MusicDLP
             DownloadInProgress = false;
             downloadProgress.Visible = false;
 
-            btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.YTDLPDownloadPath);
-            btnRemoveFFMPEG.Enabled = File.Exists(GlobalHelpers.FFMPEGApplicationExecutablePath);
+            RecheckToolInstallationStatus();
         }
 
-        private void OptionsForm_Load(object sender, EventArgs e)
-        {
+        public void RecheckToolInstallationStatus() {
             lblYtdlpInstalled.Text = File.Exists(GlobalHelpers.YTDLPDownloadPath) 
                 ? "Installed!" 
                 : "Not installed!";
@@ -74,6 +72,11 @@ namespace MusicDLP
 
             btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.YTDLPDownloadPath);
             btnRemoveFFMPEG.Enabled = File.Exists(GlobalHelpers.FFMPEGApplicationExecutablePath);
+        }
+
+        private void OptionsForm_Load(object sender, EventArgs e)
+        {
+            RecheckToolInstallationStatus();
 
             downloadProgress.Visible = false;
 
@@ -194,18 +197,35 @@ namespace MusicDLP
         }
 
         private void WCFFMPEGDownloadCompleted(object sender, AsyncCompletedEventArgs e) {
-            PostToolDownloadTasks();
-
             if (e.Error != null) {
                 MessageBox.Show("The operation did not complete successfully because of the following error: " + e.Error.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 lblFfmpegInstalled.Text = "Installation Failed!";
                 return;
             } 
 
-            CustomDialogBox customDialogBox = new CustomDialogBox("Extracting FFMPEG", "Extracting FFMPEG... Please wait for this operation to complete (this may take a while)");
+            CustomDialogBox customDialogBox = new CustomDialogBox("Extracting FFMPEG", "Extracting FFMPEG... Please wait for this operation to complete (this may take a while)", true);
             customDialogBox.Show();
-            GlobalHelpers.ExtractZipFile(GlobalHelpers.FFMPEGInstallerFilePath, "", GlobalHelpers.FFMPEGDownloadPath);
+
+            try {
+                GlobalHelpers.ExtractZipFile(GlobalHelpers.FFMPEGInstallerFilePath, "", GlobalHelpers.FFMPEGDownloadPath);
+            } catch (Exception ex) {
+                MessageBox.Show("Unable to extract the FFMPEG archive: " + ex.Message, "FFMPEG Installation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             customDialogBox.Close();
+
+            try { 
+                File.Delete(GlobalHelpers.FFMPEGInstallerFilePath);
+            } catch (Exception) { }
+
+            PostToolDownloadTasks();
+        }
+
+        private void btnRemoveFFMPEG_Click(object sender, EventArgs e) {
+            Directory.Delete(GlobalHelpers.FFMPEGDownloadPath, true);
+
+            btnRemoveFFMPEG.Enabled = false;
+            lblFfmpegInstalled.Text = "Not Installed!";
         }
     }
 }

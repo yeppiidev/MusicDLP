@@ -27,6 +27,7 @@
             this.btnDefault1 = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
+            this.progress = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // btnDefault2
@@ -75,6 +76,14 @@
     "magna aliqua. Ut enim ad minim veniam";
             this.lblMessage.UseCompatibleTextRendering = true;
             // 
+            // progress
+            // 
+            this.progress.Location = new System.Drawing.Point(-1, 169);
+            this.progress.Name = "progress";
+            this.progress.Size = new System.Drawing.Size(478, 10);
+            this.progress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progress.TabIndex = 4;
+            // 
             // CustomDialogBox
             // 
             this.AcceptButton = this.btnDefault1;
@@ -83,13 +92,14 @@
             this.CancelButton = this.btnDefault2;
             this.ClientSize = new System.Drawing.Size(476, 177);
             this.ControlBox = false;
+            this.Controls.Add(this.progress);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnDefault1);
             this.Controls.Add(this.btnDefault2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "CustomDialogBox";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Loading...";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -102,5 +112,6 @@
         private System.Windows.Forms.Button btnDefault1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.ProgressBar progress;
     }
 }

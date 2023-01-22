@@ -47,9 +47,18 @@
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageDownloader = new System.Windows.Forms.TabPage();
             this.tabPageConverter = new System.Windows.Forms.TabPage();
+            this.lblConverterSource = new System.Windows.Forms.Label();
+            this.lblConverterType = new System.Windows.Forms.Label();
+            this.lblConverterOutput = new System.Windows.Forms.Label();
+            this.cbChooseConvertFormat = new System.Windows.Forms.ComboBox();
+            this.tbConverterSource = new System.Windows.Forms.TextBox();
+            this.tbConverterOutput = new System.Windows.Forms.TextBox();
+            this.btnConverterChooseSource = new System.Windows.Forms.Button();
+            this.btnConverterChooseOutput = new System.Windows.Forms.Button();
             this.contextMenu.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageDownloader.SuspendLayout();
+            this.tabPageConverter.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -143,7 +152,7 @@
             // lblUrl
             // 
             this.lblUrl.AutoSize = true;
-            this.lblUrl.Location = new System.Drawing.Point(50, 17);
+            this.lblUrl.Location = new System.Drawing.Point(50, 16);
             this.lblUrl.Name = "lblUrl";
             this.lblUrl.Size = new System.Drawing.Size(32, 13);
             this.lblUrl.TabIndex = 2;
@@ -234,6 +243,14 @@
             // 
             // tabPageConverter
             // 
+            this.tabPageConverter.Controls.Add(this.btnConverterChooseOutput);
+            this.tabPageConverter.Controls.Add(this.btnConverterChooseSource);
+            this.tabPageConverter.Controls.Add(this.tbConverterOutput);
+            this.tabPageConverter.Controls.Add(this.tbConverterSource);
+            this.tabPageConverter.Controls.Add(this.cbChooseConvertFormat);
+            this.tabPageConverter.Controls.Add(this.lblConverterOutput);
+            this.tabPageConverter.Controls.Add(this.lblConverterType);
+            this.tabPageConverter.Controls.Add(this.lblConverterSource);
             this.tabPageConverter.Location = new System.Drawing.Point(4, 22);
             this.tabPageConverter.Name = "tabPageConverter";
             this.tabPageConverter.Padding = new System.Windows.Forms.Padding(3);
@@ -241,6 +258,90 @@
             this.tabPageConverter.TabIndex = 1;
             this.tabPageConverter.Text = "Converter";
             this.tabPageConverter.UseVisualStyleBackColor = true;
+            // 
+            // lblConverterSource
+            // 
+            this.lblConverterSource.AutoSize = true;
+            this.lblConverterSource.Location = new System.Drawing.Point(28, 13);
+            this.lblConverterSource.Name = "lblConverterSource";
+            this.lblConverterSource.Size = new System.Drawing.Size(44, 13);
+            this.lblConverterSource.TabIndex = 0;
+            this.lblConverterSource.Text = "Source:";
+            // 
+            // lblConverterType
+            // 
+            this.lblConverterType.AutoSize = true;
+            this.lblConverterType.Location = new System.Drawing.Point(15, 39);
+            this.lblConverterType.Name = "lblConverterType";
+            this.lblConverterType.Size = new System.Drawing.Size(59, 13);
+            this.lblConverterType.TabIndex = 1;
+            this.lblConverterType.Text = "Convert to:";
+            // 
+            // lblConverterOutput
+            // 
+            this.lblConverterOutput.AutoSize = true;
+            this.lblConverterOutput.Location = new System.Drawing.Point(30, 66);
+            this.lblConverterOutput.Name = "lblConverterOutput";
+            this.lblConverterOutput.Size = new System.Drawing.Size(42, 13);
+            this.lblConverterOutput.TabIndex = 2;
+            this.lblConverterOutput.Text = "Output:";
+            // 
+            // cbChooseConvertFormat
+            // 
+            this.cbChooseConvertFormat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbChooseConvertFormat.BackColor = System.Drawing.Color.White;
+            this.cbChooseConvertFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbChooseConvertFormat.FormattingEnabled = true;
+            this.cbChooseConvertFormat.Items.AddRange(new object[] {
+            "MP3",
+            "OGG",
+            "WAV",
+            "WebM"});
+            this.cbChooseConvertFormat.Location = new System.Drawing.Point(75, 36);
+            this.cbChooseConvertFormat.Name = "cbChooseConvertFormat";
+            this.cbChooseConvertFormat.Size = new System.Drawing.Size(618, 21);
+            this.cbChooseConvertFormat.TabIndex = 3;
+            // 
+            // tbConverterSource
+            // 
+            this.tbConverterSource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbConverterSource.Location = new System.Drawing.Point(75, 10);
+            this.tbConverterSource.Name = "tbConverterSource";
+            this.tbConverterSource.Size = new System.Drawing.Size(535, 20);
+            this.tbConverterSource.TabIndex = 4;
+            // 
+            // tbConverterOutput
+            // 
+            this.tbConverterOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbConverterOutput.Location = new System.Drawing.Point(75, 63);
+            this.tbConverterOutput.Name = "tbConverterOutput";
+            this.tbConverterOutput.Size = new System.Drawing.Size(535, 20);
+            this.tbConverterOutput.TabIndex = 5;
+            // 
+            // btnConverterChooseSource
+            // 
+            this.btnConverterChooseSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConverterChooseSource.Location = new System.Drawing.Point(616, 9);
+            this.btnConverterChooseSource.Name = "btnConverterChooseSource";
+            this.btnConverterChooseSource.Size = new System.Drawing.Size(78, 22);
+            this.btnConverterChooseSource.TabIndex = 6;
+            this.btnConverterChooseSource.Text = "Choose...";
+            this.btnConverterChooseSource.UseVisualStyleBackColor = true;
+            this.btnConverterChooseSource.Click += new System.EventHandler(this.btnConverterChooseSource_Click);
+            // 
+            // btnConverterChooseOutput
+            // 
+            this.btnConverterChooseOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConverterChooseOutput.Location = new System.Drawing.Point(616, 62);
+            this.btnConverterChooseOutput.Name = "btnConverterChooseOutput";
+            this.btnConverterChooseOutput.Size = new System.Drawing.Size(78, 22);
+            this.btnConverterChooseOutput.TabIndex = 7;
+            this.btnConverterChooseOutput.Text = "Choose...";
+            this.btnConverterChooseOutput.UseVisualStyleBackColor = true;
+            this.btnConverterChooseOutput.Click += new System.EventHandler(this.btnConverterChooseOutput_Click);
             // 
             // MainForm
             // 
@@ -268,6 +369,8 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabPageDownloader.ResumeLayout(false);
             this.tabPageDownloader.PerformLayout();
+            this.tabPageConverter.ResumeLayout(false);
+            this.tabPageConverter.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,6 +395,14 @@
         private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageDownloader;
         private System.Windows.Forms.TabPage tabPageConverter;
+        private System.Windows.Forms.Button btnConverterChooseOutput;
+        private System.Windows.Forms.Button btnConverterChooseSource;
+        private System.Windows.Forms.TextBox tbConverterOutput;
+        private System.Windows.Forms.TextBox tbConverterSource;
+        private System.Windows.Forms.ComboBox cbChooseConvertFormat;
+        private System.Windows.Forms.Label lblConverterOutput;
+        private System.Windows.Forms.Label lblConverterType;
+        private System.Windows.Forms.Label lblConverterSource;
     }
 }
 

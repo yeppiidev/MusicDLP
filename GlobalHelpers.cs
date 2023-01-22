@@ -18,7 +18,7 @@ namespace MusicDLP
         public static string YTDLPDownloadPath = DefaultToolDownloadPath + "\\yt-dlp.exe";
         public static string FFMPEGDownloadPath = DefaultToolDownloadPath + "\\ffmpeg";
         public static string FFMPEGInstallerFilePath = DefaultToolDownloadPath + "\\ffmpeg.zip";
-        public static string FFMPEGApplicationExecutablePath = FFMPEGDownloadPath + "\\bin\\ffmpeg.exe";
+        public static string FFMPEGApplicationExecutablePath = FFMPEGDownloadPath + "\\ffmpeg-master-latest-win64-lgpl\\bin\\ffmpeg.exe";
 
         public static void ExtractZipFile(string archivePath, string password, string outFolder) {
             using (var fsInput = File.OpenRead(archivePath))

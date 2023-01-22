@@ -282,6 +282,7 @@
             this.btnRemoveFFMPEG.TabIndex = 10;
             this.btnRemoveFFMPEG.Text = "Remove";
             this.btnRemoveFFMPEG.UseVisualStyleBackColor = true;
+            this.btnRemoveFFMPEG.Click += new System.EventHandler(this.btnRemoveFFMPEG_Click);
             // 
             // OptionsForm
             // 
