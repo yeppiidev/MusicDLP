@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Automation;
 using System.Windows.Forms;
+using ICSharpCode.SharpZipLib.Core;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace MusicDLP
 {
@@ -14,6 +16,52 @@ namespace MusicDLP
     {
         public static string DefaultToolDownloadPath = Environment.ExpandEnvironmentVariables("%APPDATA%\\MusicDLP\\Tools");
         public static string YTDLPDownloadPath = DefaultToolDownloadPath + "\\yt-dlp.exe";
+        public static string FFMPEGDownloadPath = DefaultToolDownloadPath + "\\ffmpeg";
+        public static string FFMPEGInstallerFilePath = DefaultToolDownloadPath + "\\ffmpeg.zip";
+        public static string FFMPEGApplicationExecutablePath = FFMPEGDownloadPath + "\\bin\\ffmpeg.exe";
+
+        public static void ExtractZipFile(string archivePath, string password, string outFolder) {
+            using (var fsInput = File.OpenRead(archivePath))
+            using (var zf = new ZipFile(fsInput)) {
+
+                if (!string.IsNullOrEmpty(password)) {
+                    // AES encrypted entries are handled automatically
+                    zf.Password = password;
+                }
+
+                foreach (ZipEntry zipEntry in zf) {
+                    if (!zipEntry.IsFile) {
+                        // Ignore directories
+                        continue;
+                    }
+                    string entryFileName = zipEntry.Name;
+                    // to remove the folder from the entry:
+                    //entryFileName = Path.GetFileName(entryFileName);
+                    // Optionally match entrynames against a selection list here
+                    // to skip as desired.
+                    // The unpacked length is available in the zipEntry.Size property.
+
+                    // Manipulate the output filename here as desired.
+                    var fullZipToPath = Path.Combine(outFolder, entryFileName);
+                    var directoryName = Path.GetDirectoryName(fullZipToPath);
+                    
+                    if (directoryName.Length > 0) {
+                        Directory.CreateDirectory(directoryName);
+                    }
+
+                    // 4K is optimum
+                    var buffer = new byte[4096];
+
+                    // Unzip file in buffered chunks. This is just as fast as unpacking
+                    // to a buffer the full size of the file, but does not waste memory.
+                    // The "using" will close the stream even if an exception occurs.
+                    using (var zipStream = zf.GetInputStream(zipEntry))
+                    using (Stream fsOutput = File.Create(fullZipToPath)) {
+                        StreamUtils.Copy(zipStream, fsOutput, buffer);
+                    }
+                }
+            }
+        }
 
         public static bool ExistsOnPath(string fileName)
         {

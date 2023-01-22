@@ -8,7 +8,7 @@ namespace MusicDLP
 {
     public class URLConstants
     {
-        public static String ytdlpDownloadUrl = "https://github.com/yt-dlp/yt-dlp/releases/download/2023.01.06/yt-dlp.exe";
-
+        public static string ytdlpDownloadUrl = "https://github.com/yt-dlp/yt-dlp/releases/download/2023.01.06/yt-dlp.exe";
+        public static string FFMPEGDownloadUrl = "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-lgpl.zip";
     }
 }

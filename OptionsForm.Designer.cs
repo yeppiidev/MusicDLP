@@ -47,6 +47,7 @@
             this.lblFfmpegInstalled = new System.Windows.Forms.Label();
             this.linkLblFfmpeg = new System.Windows.Forms.LinkLabel();
             this.btnDownloadFfmpeg = new System.Windows.Forms.Button();
+            this.btnRemoveFFMPEG = new System.Windows.Forms.Button();
             this.tabControlOptions.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.tabAdditionalTools.SuspendLayout();
@@ -120,6 +121,7 @@
             // 
             // tabAdditionalTools
             // 
+            this.tabAdditionalTools.Controls.Add(this.btnRemoveFFMPEG);
             this.tabAdditionalTools.Controls.Add(this.btnDownloadFfmpeg);
             this.tabAdditionalTools.Controls.Add(this.lblSeperator2);
             this.tabAdditionalTools.Controls.Add(this.btnRemoveYtdlp);
@@ -263,13 +265,23 @@
             // btnDownloadFfmpeg
             // 
             this.btnDownloadFfmpeg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDownloadFfmpeg.Location = new System.Drawing.Point(351, 40);
+            this.btnDownloadFfmpeg.Location = new System.Drawing.Point(424, 40);
             this.btnDownloadFfmpeg.Name = "btnDownloadFfmpeg";
-            this.btnDownloadFfmpeg.Size = new System.Drawing.Size(148, 23);
+            this.btnDownloadFfmpeg.Size = new System.Drawing.Size(75, 23);
             this.btnDownloadFfmpeg.TabIndex = 9;
-            this.btnDownloadFfmpeg.Text = "Download (External)";
+            this.btnDownloadFfmpeg.Text = "Download";
             this.btnDownloadFfmpeg.UseVisualStyleBackColor = true;
             this.btnDownloadFfmpeg.Click += new System.EventHandler(this.btnDownloadFfmpeg_Click);
+            // 
+            // btnRemoveFFMPEG
+            // 
+            this.btnRemoveFFMPEG.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveFFMPEG.Location = new System.Drawing.Point(351, 41);
+            this.btnRemoveFFMPEG.Name = "btnRemoveFFMPEG";
+            this.btnRemoveFFMPEG.Size = new System.Drawing.Size(67, 23);
+            this.btnRemoveFFMPEG.TabIndex = 10;
+            this.btnRemoveFFMPEG.Text = "Remove";
+            this.btnRemoveFFMPEG.UseVisualStyleBackColor = true;
             // 
             // OptionsForm
             // 
@@ -322,5 +334,6 @@
         private System.Windows.Forms.Label lblFfmpegInstalled;
         private System.Windows.Forms.LinkLabel linkLblFfmpeg;
         private System.Windows.Forms.Button btnDownloadFfmpeg;
+        private System.Windows.Forms.Button btnRemoveFFMPEG;
     }
 }

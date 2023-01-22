@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -39,6 +40,10 @@ namespace MusicDLP
         public void PreToolDownloadTasks() {
             btnCancel.Enabled = false;
             btnOK.Enabled = false;
+            
+            btnDownloadFfmpeg.Enabled = false;
+            btnDownloadYtdlp.Enabled = false;
+
             DownloadInProgress = true;
 
             DialogResult = DialogResult.None;
@@ -47,9 +52,15 @@ namespace MusicDLP
         public void PostToolDownloadTasks() {
             btnCancel.Enabled = true;
             btnOK.Enabled = true;
+
+            btnDownloadFfmpeg.Enabled = true;
+            btnDownloadYtdlp.Enabled = true;
+
             DownloadInProgress = false;
+            downloadProgress.Visible = false;
 
             btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.YTDLPDownloadPath);
+            btnRemoveFFMPEG.Enabled = File.Exists(GlobalHelpers.FFMPEGApplicationExecutablePath);
         }
 
         private void OptionsForm_Load(object sender, EventArgs e)
@@ -57,7 +68,12 @@ namespace MusicDLP
             lblYtdlpInstalled.Text = File.Exists(GlobalHelpers.YTDLPDownloadPath) 
                 ? "Installed!" 
                 : "Not installed!";
+            lblFfmpegInstalled.Text = File.Exists(GlobalHelpers.FFMPEGApplicationExecutablePath)
+                ? "Installed!"
+                : "Not installed!";
+
             btnRemoveYtdlp.Enabled = File.Exists(GlobalHelpers.YTDLPDownloadPath);
+            btnRemoveFFMPEG.Enabled = File.Exists(GlobalHelpers.FFMPEGApplicationExecutablePath);
 
             downloadProgress.Visible = false;
 
@@ -81,7 +97,10 @@ namespace MusicDLP
 
         private void btnDownloadYtdlp_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("This will now download and install yt-dlp to your system (local install, not adding to PATH). Continue?", "Confirmation required", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = new CustomDialogBox("Download yt-dlp", 
+                                                      "This application uses yt-dlp to extract and download music from a YouTube video. Do you want to download it now?", 
+                                                      CustomDialogBoxButtons.YesNo)
+                                                     .ShowDialog();
 
             if (result == DialogResult.Yes)
             {
@@ -91,7 +110,7 @@ namespace MusicDLP
                 
                 using (WebClient wc = new WebClient())
                 {
-                    wc.DownloadProgressChanged += Wc_DownloadProgressChanged; ;
+                    wc.DownloadProgressChanged += DownloadProgressChanged; ;
                     wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
                     wc.DownloadFileAsync(
                         // Param1 = Link of file
@@ -110,26 +129,24 @@ namespace MusicDLP
         {
             PostToolDownloadTasks();
 
-            downloadProgress.Visible = false;
-
             if (e.Error != null)
             {
                 MessageBox.Show("The operation did not complete successfully because of the following error: " + e.Error.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 lblYtdlpInstalled.Text = "Installation Failed!";
-            } else
+                return;
+            }
+
+            lblYtdlpInstalled.Text = "Installed!";
+
+            DialogResult result = MessageBox.Show("yt-dlp was installed successfully!", "Operation Completed",  MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            if (result == DialogResult.OK)
             {
-                lblYtdlpInstalled.Text = "Installed!";
-
-                DialogResult result = MessageBox.Show("yt-dlp was installed successfully!", "Operation Completed",  MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                if (result == DialogResult.OK)
-                {
-                    Process.Start("explorer.exe", GlobalHelpers.DefaultToolDownloadPath);
-                }
+                Process.Start("explorer.exe", GlobalHelpers.DefaultToolDownloadPath);
             }
         }
 
-        private void Wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        private void DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             downloadProgress.Value = e.ProgressPercentage;
         }
@@ -149,8 +166,46 @@ namespace MusicDLP
         }
 
         private void btnDownloadFfmpeg_Click(object sender, EventArgs e) {
-            CustomDialogBox customDialogBox = new CustomDialogBox("Download FFMPEG", "FFMPEG is utilized by the converter utility and needs to be downloaded and installed manually. Do you want to start the download now? ", CustomDialogBoxButtons.YesNo);
-            DialogResult result = customDialogBox.ShowDialog();
+            DialogResult result = new CustomDialogBox("Download FFMPEG", 
+                                                      "FFMPEG is utilized by the converter utility. Do you want to download it now?", 
+                                                      CustomDialogBoxButtons.YesNo)
+                                                      .ShowDialog();
+            
+            if (result == DialogResult.Yes) {
+                PreToolDownloadTasks();
+
+                Directory.CreateDirectory(GlobalHelpers.DefaultToolDownloadPath);
+
+                using (WebClient wc = new WebClient()) {
+                    wc.DownloadProgressChanged += DownloadProgressChanged;
+                    wc.DownloadFileCompleted += WCFFMPEGDownloadCompleted;
+
+                    wc.DownloadFileAsync(
+                        // Param1 = Link of file
+                        new Uri(URLConstants.FFMPEGDownloadUrl),
+                        // Param2 = Path to save
+                        GlobalHelpers.FFMPEGInstallerFilePath
+                    );
+
+                    lblFfmpegInstalled.Text = "Downloading...";
+                    downloadProgress.Visible = true;
+                }
+            }
+        }
+
+        private void WCFFMPEGDownloadCompleted(object sender, AsyncCompletedEventArgs e) {
+            PostToolDownloadTasks();
+
+            if (e.Error != null) {
+                MessageBox.Show("The operation did not complete successfully because of the following error: " + e.Error.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblFfmpegInstalled.Text = "Installation Failed!";
+                return;
+            } 
+
+            CustomDialogBox customDialogBox = new CustomDialogBox("Extracting FFMPEG", "Extracting FFMPEG... Please wait for this operation to complete (this may take a while)");
+            customDialogBox.Show();
+            GlobalHelpers.ExtractZipFile(GlobalHelpers.FFMPEGInstallerFilePath, "", GlobalHelpers.FFMPEGDownloadPath);
+            customDialogBox.Close();
         }
     }
 }
