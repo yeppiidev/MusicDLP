@@ -20,7 +20,8 @@ namespace MusicDLP {
 
             txtDownloadFolder.Text = InitialDownloadLocation;
             downloadProgress.Visible = false;
-            rtbOutput.Height += downloadProgress.Height;
+            rtbOutput.Height += downloadProgress.Height + (downloadProgress.Location.X - rtbOutput.Location.X);
+            MinimumSize = Size;
         }
 
         public void PreDownloadTasks() {
@@ -89,6 +90,11 @@ namespace MusicDLP {
                 return;
             }
 
+            if (!Directory.Exists(txtDownloadFolder.Text)) {
+                MessageBox.Show("The folder you've selected does not seem to exist. Please choose another folder!", "Invalid Arguments", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             PreDownloadTasks();
 
             // You can also use an anonymous delegate to do this.
@@ -111,6 +117,7 @@ namespace MusicDLP {
                     process.EnableRaisingEvents = true;
                     process.OutputDataReceived += (snd, args) => {
                         rtbOutput.Text += args.Data + "\r\n";
+                        
                         builder.AppendLine(args.Data);
                     };
                     process.ErrorDataReceived += (snd, args) => builder.AppendLine(args.Data);
@@ -176,6 +183,19 @@ namespace MusicDLP {
 
         private void clearLogToolStripMenuItem_Click(object sender, EventArgs e) {
             rtbOutput.Text = "";
+        }
+
+        private void txtUrl_TextChanged(object sender, EventArgs e) {
+
+        }
+
+        private void txtDownloadFolder_TextChanged(object sender, EventArgs e) {
+
+        }
+
+        private void rtbOutput_TextChanged(object sender, EventArgs e) {
+            rtbOutput.SelectionStart = rtbOutput.Text.Length;
+            rtbOutput.ScrollToCaret();
         }
     }
 }

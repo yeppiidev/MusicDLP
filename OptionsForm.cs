@@ -147,5 +147,10 @@ namespace MusicDLP
         private void OptionsForm_FormClosing(object sender, FormClosingEventArgs e) {
             if (DownloadInProgress) e.Cancel = true;
         }
+
+        private void btnDownloadFfmpeg_Click(object sender, EventArgs e) {
+            CustomDialogBox customDialogBox = new CustomDialogBox("Download FFMPEG", "FFMPEG is utilized by the converter utility and needs to be downloaded and installed manually. Do you want to start the download now? ", CustomDialogBoxButtons.YesNo);
+            DialogResult result = customDialogBox.ShowDialog();
+        }
     }
 }

@@ -35,6 +35,7 @@
             this.cbClearPreviousOutput = new System.Windows.Forms.CheckBox();
             this.cbShowOutputConsole = new System.Windows.Forms.CheckBox();
             this.tabAdditionalTools = new System.Windows.Forms.TabPage();
+            this.btnRemoveYtdlp = new System.Windows.Forms.Button();
             this.lblSeperator = new System.Windows.Forms.Label();
             this.downloadProgress = new System.Windows.Forms.ProgressBar();
             this.lblYtdlpInstalled = new System.Windows.Forms.Label();
@@ -42,7 +43,10 @@
             this.btnDownloadYtdlp = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.btnRemoveYtdlp = new System.Windows.Forms.Button();
+            this.lblSeperator2 = new System.Windows.Forms.Label();
+            this.lblFfmpegInstalled = new System.Windows.Forms.Label();
+            this.linkLblFfmpeg = new System.Windows.Forms.LinkLabel();
+            this.btnDownloadFfmpeg = new System.Windows.Forms.Button();
             this.tabControlOptions.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.tabAdditionalTools.SuspendLayout();
@@ -68,7 +72,7 @@
             this.tabControlOptions.Location = new System.Drawing.Point(22, 68);
             this.tabControlOptions.Name = "tabControlOptions";
             this.tabControlOptions.SelectedIndex = 0;
-            this.tabControlOptions.Size = new System.Drawing.Size(515, 278);
+            this.tabControlOptions.Size = new System.Drawing.Size(515, 273);
             this.tabControlOptions.TabIndex = 1;
             // 
             // tabGeneral
@@ -116,7 +120,11 @@
             // 
             // tabAdditionalTools
             // 
+            this.tabAdditionalTools.Controls.Add(this.btnDownloadFfmpeg);
+            this.tabAdditionalTools.Controls.Add(this.lblSeperator2);
             this.tabAdditionalTools.Controls.Add(this.btnRemoveYtdlp);
+            this.tabAdditionalTools.Controls.Add(this.lblFfmpegInstalled);
+            this.tabAdditionalTools.Controls.Add(this.linkLblFfmpeg);
             this.tabAdditionalTools.Controls.Add(this.lblSeperator);
             this.tabAdditionalTools.Controls.Add(this.downloadProgress);
             this.tabAdditionalTools.Controls.Add(this.lblYtdlpInstalled);
@@ -125,10 +133,21 @@
             this.tabAdditionalTools.Location = new System.Drawing.Point(4, 22);
             this.tabAdditionalTools.Name = "tabAdditionalTools";
             this.tabAdditionalTools.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAdditionalTools.Size = new System.Drawing.Size(507, 252);
+            this.tabAdditionalTools.Size = new System.Drawing.Size(507, 247);
             this.tabAdditionalTools.TabIndex = 1;
             this.tabAdditionalTools.Text = "Additional Tools";
             this.tabAdditionalTools.UseVisualStyleBackColor = true;
+            // 
+            // btnRemoveYtdlp
+            // 
+            this.btnRemoveYtdlp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveYtdlp.Location = new System.Drawing.Point(351, 11);
+            this.btnRemoveYtdlp.Name = "btnRemoveYtdlp";
+            this.btnRemoveYtdlp.Size = new System.Drawing.Size(67, 23);
+            this.btnRemoveYtdlp.TabIndex = 6;
+            this.btnRemoveYtdlp.Text = "Remove";
+            this.btnRemoveYtdlp.UseVisualStyleBackColor = true;
+            this.btnRemoveYtdlp.Click += new System.EventHandler(this.btnRemoveYtdlp_Click);
             // 
             // lblSeperator
             // 
@@ -144,7 +163,7 @@
             // 
             this.downloadProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.downloadProgress.Location = new System.Drawing.Point(8, 221);
+            this.downloadProgress.Location = new System.Drawing.Point(8, 216);
             this.downloadProgress.Name = "downloadProgress";
             this.downloadProgress.Size = new System.Drawing.Size(491, 23);
             this.downloadProgress.TabIndex = 4;
@@ -188,7 +207,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(458, 357);
+            this.btnCancel.Location = new System.Drawing.Point(458, 354);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 3;
@@ -200,7 +219,7 @@
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(377, 357);
+            this.btnOK.Location = new System.Drawing.Point(377, 354);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 2;
@@ -208,16 +227,49 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // btnRemoveYtdlp
+            // lblSeperator2
             // 
-            this.btnRemoveYtdlp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemoveYtdlp.Location = new System.Drawing.Point(351, 11);
-            this.btnRemoveYtdlp.Name = "btnRemoveYtdlp";
-            this.btnRemoveYtdlp.Size = new System.Drawing.Size(67, 23);
-            this.btnRemoveYtdlp.TabIndex = 6;
-            this.btnRemoveYtdlp.Text = "Remove";
-            this.btnRemoveYtdlp.UseVisualStyleBackColor = true;
-            this.btnRemoveYtdlp.Click += new System.EventHandler(this.btnRemoveYtdlp_Click);
+            this.lblSeperator2.AutoSize = true;
+            this.lblSeperator2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSeperator2.Location = new System.Drawing.Point(63, 43);
+            this.lblSeperator2.Name = "lblSeperator2";
+            this.lblSeperator2.Size = new System.Drawing.Size(13, 17);
+            this.lblSeperator2.TabIndex = 8;
+            this.lblSeperator2.Text = "-";
+            // 
+            // lblFfmpegInstalled
+            // 
+            this.lblFfmpegInstalled.AutoSize = true;
+            this.lblFfmpegInstalled.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFfmpegInstalled.Location = new System.Drawing.Point(75, 46);
+            this.lblFfmpegInstalled.Name = "lblFfmpegInstalled";
+            this.lblFfmpegInstalled.Size = new System.Drawing.Size(54, 13);
+            this.lblFfmpegInstalled.TabIndex = 7;
+            this.lblFfmpegInstalled.Text = "Loading...";
+            this.lblFfmpegInstalled.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // linkLblFfmpeg
+            // 
+            this.linkLblFfmpeg.AutoSize = true;
+            this.linkLblFfmpeg.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.linkLblFfmpeg.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLblFfmpeg.Location = new System.Drawing.Point(13, 45);
+            this.linkLblFfmpeg.Name = "linkLblFfmpeg";
+            this.linkLblFfmpeg.Size = new System.Drawing.Size(49, 15);
+            this.linkLblFfmpeg.TabIndex = 6;
+            this.linkLblFfmpeg.TabStop = true;
+            this.linkLblFfmpeg.Text = "ffmpeg";
+            // 
+            // btnDownloadFfmpeg
+            // 
+            this.btnDownloadFfmpeg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDownloadFfmpeg.Location = new System.Drawing.Point(351, 40);
+            this.btnDownloadFfmpeg.Name = "btnDownloadFfmpeg";
+            this.btnDownloadFfmpeg.Size = new System.Drawing.Size(148, 23);
+            this.btnDownloadFfmpeg.TabIndex = 9;
+            this.btnDownloadFfmpeg.Text = "Download (External)";
+            this.btnDownloadFfmpeg.UseVisualStyleBackColor = true;
+            this.btnDownloadFfmpeg.Click += new System.EventHandler(this.btnDownloadFfmpeg_Click);
             // 
             // OptionsForm
             // 
@@ -266,5 +318,9 @@
         private System.Windows.Forms.CheckBox cbClearPreviousOutput;
         private System.Windows.Forms.CheckBox cbShowDownloadOutput;
         private System.Windows.Forms.Button btnRemoveYtdlp;
+        private System.Windows.Forms.Label lblSeperator2;
+        private System.Windows.Forms.Label lblFfmpegInstalled;
+        private System.Windows.Forms.LinkLabel linkLblFfmpeg;
+        private System.Windows.Forms.Button btnDownloadFfmpeg;
     }
 }
