@@ -21,4 +21,30 @@
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Themes\ColourDictionaries\DarkGreyTheme.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Themes\ColourDictionaries\DeepDark.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Themes\ColourDictionaries\GreyTheme.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Themes\ColourDictionaries\LightTheme.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Themes\ColourDictionaries\RedBlackTheme.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Themes\ColourDictionaries\SoftDark.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Themes\ControlColours.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Update="Themes\Controls.xaml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
 </Project>
