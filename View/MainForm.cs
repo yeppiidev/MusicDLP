@@ -1,4 +1,5 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using MusicDLP.ViewModel.Helpers;
 using System;
 using System.Diagnostics;
 using System.IO;

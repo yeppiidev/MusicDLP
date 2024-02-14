@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
+using MusicDLP.ViewModel.Helpers;
 
 namespace MusicDLP
 {
