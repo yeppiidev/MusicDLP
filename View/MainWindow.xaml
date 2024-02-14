@@ -24,10 +24,10 @@
         <TextBlock DockPanel.Dock="Bottom" Background="WhiteSmoke" Height="30" Margin="20 10 20 10" />
         <TextBlock DockPanel.Dock="Bottom" Background="Black" Height="200" Margin="20 10 20 10" Text="{Binding Log}"/>
 
-        <TabControl>
+        <TabControl Margin="20 10 20 0">
 
             <TabItem Header="Downloader">
-                <Grid Margin="10 20 20 0">
+                <Grid Margin="0 10 10 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="120"/>
                         <ColumnDefinition Width="20"/>
