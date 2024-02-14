@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using MusicDLP.ViewModel.Commands;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -14,6 +15,8 @@ public class MainVM : INotifyPropertyChanged
         reference = value;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+
 
     #region String properties
     private string _url = string.Empty;
@@ -35,11 +38,42 @@ public class MainVM : INotifyPropertyChanged
     public ObservableCollection<string> ConvertExtensions { get; set; } = ["MP3", "OGG", "WAV", "WebM"];
 
 
+    public ChooseCommand ChooseCommand { get; set; }
+    public Closecommand Closecommand { get; set; }
+    public OptionsCommand OptionsCommand { get; set; }
+    public StartCommand StartCommand { get; set; }
+
+
 
     public MainVM()
     {
         Log = "[log start]";
 
-
+        ChooseCommand = new(this);
+        Closecommand = new(this);
+        OptionsCommand = new(this);
+        StartCommand = new(this);
     }
+
+    #region Command Methods
+    internal void Options()
+    {
+        throw new NotImplementedException();
+    }
+
+    internal void Choose(object parameter)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal void Close()
+    {
+        throw new NotImplementedException();
+    }
+
+    internal void Start()
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
 }

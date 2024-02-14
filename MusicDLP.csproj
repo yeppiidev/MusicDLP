@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="ViewModel\Commands\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Themes\ColourDictionaries\DarkGreyTheme.xaml">
