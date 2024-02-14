@@ -11,13 +11,13 @@
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="CustomDialogBox.cs">
+    <Compile Update="View\CustomDialogBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MainForm.cs">
+    <Compile Update="View\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="OptionsForm.cs">
+    <Compile Update="View\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
