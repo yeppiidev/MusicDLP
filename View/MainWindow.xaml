@@ -43,7 +43,7 @@
                     <DockPanel Grid.Column="2" Grid.Row="1">
                         <Button DockPanel.Dock="Right" Content="Choose..." Margin="10 0 0 0" Width="80" 
                                 Command="{Binding ChooseCommand}" CommandParameter="{Binding ElementName=downloadTextBox}"/>
-                        <TextBox x:Name="downloadTextBox" VerticalContentAlignment="Bottom" Text="{Binding DownloadTo}"/>
+                        <TextBox x:Name="downloadTextBox" VerticalContentAlignment="Bottom" Text="{Binding DownloadTo}" />
                     </DockPanel>
                 </Grid>
             </TabItem>

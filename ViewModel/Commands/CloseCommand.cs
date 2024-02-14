@@ -1,6 +1,8 @@
-﻿namespace MusicDLP.ViewModel.Commands;
+﻿using System.Windows;
 
-public class Closecommand(MainVM vm) : CommandBase
+namespace MusicDLP.ViewModel.Commands;
+
+public class Closecommand() : CommandBase
 {
-    public override void Execute(object parameter) => vm.Close();
+    public override void Execute(object parameter) => Application.Current.Shutdown();
 }
