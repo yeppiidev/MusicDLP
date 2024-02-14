@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ICSharpCode.SharpZipLib.Core;
+using ICSharpCode.SharpZipLib.Zip;
+
+using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Automation;
-using System.Windows.Forms;
-using ICSharpCode.SharpZipLib.Core;
-using ICSharpCode.SharpZipLib.Zip;
 
 namespace MusicDLP
 {
@@ -20,17 +16,21 @@ namespace MusicDLP
         public static string FFMPEGInstallerFilePath = DefaultToolDownloadPath + "\\ffmpeg.zip";
         public static string FFMPEGApplicationExecutablePath = FFMPEGDownloadPath + "\\ffmpeg-master-latest-win64-lgpl\\bin\\ffmpeg.exe";
 
-        public static void ExtractZipFile(string archivePath, string password, string outFolder) {
+        public static void ExtractZipFile(string archivePath, string password, string outFolder)
+        {
             using (var fsInput = File.OpenRead(archivePath))
-            using (var zf = new ZipFile(fsInput)) {
-
-                if (!string.IsNullOrEmpty(password)) {
+            using (var zf = new ZipFile(fsInput))
+            {
+                if (!string.IsNullOrEmpty(password))
+                {
                     // AES encrypted entries are handled automatically
                     zf.Password = password;
                 }
 
-                foreach (ZipEntry zipEntry in zf) {
-                    if (!zipEntry.IsFile) {
+                foreach (ZipEntry zipEntry in zf)
+                {
+                    if (!zipEntry.IsFile)
+                    {
                         // Ignore directories
                         continue;
                     }
@@ -44,8 +44,9 @@ namespace MusicDLP
                     // Manipulate the output filename here as desired.
                     var fullZipToPath = Path.Combine(outFolder, entryFileName);
                     var directoryName = Path.GetDirectoryName(fullZipToPath);
-                    
-                    if (directoryName.Length > 0) {
+
+                    if (directoryName.Length > 0)
+                    {
                         Directory.CreateDirectory(directoryName);
                     }
 
@@ -56,7 +57,8 @@ namespace MusicDLP
                     // to a buffer the full size of the file, but does not waste memory.
                     // The "using" will close the stream even if an exception occurs.
                     using (var zipStream = zf.GetInputStream(zipEntry))
-                    using (Stream fsOutput = File.Create(fullZipToPath)) {
+                    using (Stream fsOutput = File.Create(fullZipToPath))
+                    {
                         StreamUtils.Copy(zipStream, fsOutput, buffer);
                     }
                 }
@@ -86,7 +88,8 @@ namespace MusicDLP
         /// <summary>
         /// Attempt to close modal windows if there are any.
         /// </summary>
-        public static void CloseModalWindows() {
+        public static void CloseModalWindows()
+        {
             // get the main window
             AutomationElement root = AutomationElement.FromHandle(Process.GetCurrentProcess().MainWindowHandle);
 
@@ -98,15 +101,19 @@ namespace MusicDLP
             if (!root.TryGetCurrentPattern(WindowPattern.Pattern, out pattern))
                 return;
 
-            WindowPattern window = (WindowPattern) pattern;
-            if (window.Current.WindowInteractionState != WindowInteractionState.ReadyForUserInteraction) {
+            WindowPattern window = (WindowPattern)pattern;
+            if (window.Current.WindowInteractionState != WindowInteractionState.ReadyForUserInteraction)
+            {
                 // get sub windows
-                foreach (AutomationElement element in root.FindAll(TreeScope.Children, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window))) {
+                foreach (AutomationElement element in root.FindAll(TreeScope.Children, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window)))
+                {
                     // hmmm... is it really a window?
-                    if (element.TryGetCurrentPattern(WindowPattern.Pattern, out pattern)) {
+                    if (element.TryGetCurrentPattern(WindowPattern.Pattern, out pattern))
+                    {
                         // if it's ready, try to close it
-                        WindowPattern childWindow = (WindowPattern) pattern;
-                        if (childWindow.Current.WindowInteractionState == WindowInteractionState.ReadyForUserInteraction) {
+                        WindowPattern childWindow = (WindowPattern)pattern;
+                        if (childWindow.Current.WindowInteractionState == WindowInteractionState.ReadyForUserInteraction)
+                        {
                             childWindow.Close();
                         }
                     }
@@ -114,15 +121,20 @@ namespace MusicDLP
             }
         }
 
-        public static void SetLastDownloadFolderLocation(string newLocation) {
+        public static void SetLastDownloadFolderLocation(string newLocation)
+        {
             Properties.Settings.Default["lastDownloadFolderLocation"] = newLocation;
             Properties.Settings.Default.Save();
         }
 
-        public static string GetLastDownloadFolderLocation() {
-            if ((string) Properties.Settings.Default["lastDownloadFolderLocation"] != "") {
-                return (string) Properties.Settings.Default["lastDownloadFolderLocation"];
-            } else {
+        public static string GetLastDownloadFolderLocation()
+        {
+            if ((string)Properties.Settings.Default["lastDownloadFolderLocation"] != "")
+            {
+                return (string)Properties.Settings.Default["lastDownloadFolderLocation"];
+            }
+            else
+            {
                 return Environment.ExpandEnvironmentVariables("%USERPROFILE%\\Music");
             }
         }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MusicDLP
@@ -12,7 +9,7 @@ namespace MusicDLP
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.ThreadException += Application_ThreadException;
@@ -20,7 +17,8 @@ namespace MusicDLP
             Application.Run(new MainForm());
         }
 
-        private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e) {
+        private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
             MessageBox.Show("An unknown error has occurred: " + e.Exception.Message + "\n\nThe application will now exit to prevent further glitches/damages.", "Oopsies!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             Application.Exit();
         }

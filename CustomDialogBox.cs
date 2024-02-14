@@ -1,53 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace MusicDLP {
-    public enum CustomDialogBoxButtons {
+namespace MusicDLP
+{
+    public enum CustomDialogBoxButtons
+    {
         OkCancel,
         YesNo,
         MessageBox
     }
 
-    public partial class CustomDialogBox : Form {
-        public CustomDialogBox(string title, string message) {
+    public partial class CustomDialogBox : Form
+    {
+        public CustomDialogBox(string title, string message)
+        {
             InitializeComponent();
 
             SetTitleAndMessage(title, message);
         }
 
-        public CustomDialogBox(string title, string message, bool isProgressDialog) {
+        public CustomDialogBox(string title, string message, bool isProgressDialog)
+        {
             InitializeComponent();
 
             SetTitleAndMessage(title, message);
             SetProgressDialog(isProgressDialog);
         }
 
-        public CustomDialogBox(string title, string message, CustomDialogBoxButtons buttons) {
+        public CustomDialogBox(string title, string message, CustomDialogBoxButtons buttons)
+        {
             InitializeComponent();
 
             SetTitleAndMessage(title, message);
             SetDefaultButtons(buttons);
         }
 
-        public void SetTitleAndMessage(string title, string message) {
+        public void SetTitleAndMessage(string title, string message)
+        {
             Text = title;
             lblTitle.Text = title;
             lblMessage.Text = message;
         }
 
-        public void SetProgressDialog(bool flag) {
+        public void SetProgressDialog(bool flag)
+        {
             progress.Visible = flag;
         }
 
-        public void SetDefaultButtons(CustomDialogBoxButtons buttons) {
-            switch (buttons) {
+        public void SetDefaultButtons(CustomDialogBoxButtons buttons)
+        {
+            switch (buttons)
+            {
                 case CustomDialogBoxButtons.YesNo:
                     btnDefault1.Text = "Yes";
                     btnDefault2.Text = "No";
@@ -55,6 +57,7 @@ namespace MusicDLP {
                     btnDefault1.DialogResult = DialogResult.Yes;
                     btnDefault2.DialogResult = DialogResult.No;
                     break;
+
                 case CustomDialogBoxButtons.OkCancel:
                     btnDefault1.Text = "OK";
                     btnDefault2.Text = "Cancel";
@@ -63,6 +66,7 @@ namespace MusicDLP {
                     btnDefault2.DialogResult = DialogResult.Cancel;
 
                     break;
+
                 default:
                     btnDefault1.Visible = false;
 
