@@ -1,4 +1,4 @@
-﻿namespace MusicDLP
+﻿namespace MusicDLP_WinForms
 {
     partial class OptionsForm
     {

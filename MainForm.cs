@@ -1,6 +1,4 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using MusicDLP.ViewModel.Helpers;
-using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -8,7 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Application = System.Windows.Forms.Application;
 
-namespace MusicDLP
+namespace MusicDLP_WinForms
 {
     public partial class MainForm : Form
     {
@@ -32,7 +30,7 @@ namespace MusicDLP
             rtbOutput.Height -= downloadProgress.Height;
             btnStartDownload.Enabled = false;
 
-            if ((bool)Properties.Settings.Default["clearPreviousOutput"])
+            if (PropertiesHelper.ClearPreviousOutput)
             {
                 rtbOutput.Text = "";
             }
@@ -120,7 +118,7 @@ namespace MusicDLP
 
                         ProcessStartInfo startInfo = new ProcessStartInfo();
 
-                        startInfo.CreateNoWindow = !(bool)Properties.Settings.Default["showConsoleOutput"];
+                        startInfo.CreateNoWindow = !PropertiesHelper.ShowConsoleOutput;
                         startInfo.FileName = GlobalHelpers.YTDLPDownloadPath;
                         startInfo.Arguments = $"{txtUrl.Text} --ignore-errors -f \"bestaudio[ext=m4a]\" --extract-audio --add-metadata --postprocessor-args \"-metadata date='${{year}}' -metadata artist='${{artist}}'\" --embed-thumbnail --ppa \"EmbedThumbnail+ffmpeg_o:-c:v mjpeg -vf crop=\"'if(gt(ih,iw),iw,ih)':'if(gt(iw,ih),ih,iw)'\"\" --convert-thumbnail jpg --parse-metadata \"playlist_index:%(track_number)s\" --parse-metadata \":(?P<webpage_url>)\" --parse-metadata \":(?P<synopsis>)\" --parse-metadata \":(?P<description>)\" -o \"{txtDownloadFolder.Text}\\%(title)s.%(ext)s\"";
 
@@ -147,7 +145,7 @@ namespace MusicDLP
 
                         PostDownloadTasks(builder.ToString());
 
-                        if ((bool)Properties.Settings.Default["showDownloadOutput"])
+                        if (PropertiesHelper.ShowDownloadOutput)
                             Process.Start("explorer.exe", txtDownloadFolder.Text);
                     }
                 });

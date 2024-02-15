@@ -1,4 +1,5 @@
-﻿namespace MusicDLP {
+﻿namespace MusicDLP_WinForms
+{
     partial class CustomDialogBox {
         /// <summary>
         /// Required designer variable.

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace MusicDLP
+namespace MusicDLP_WinForms
 {
     public enum CustomDialogBoxButtons
     {

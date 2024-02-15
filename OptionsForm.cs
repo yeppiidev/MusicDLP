@@ -1,12 +1,11 @@
-﻿using System;
+﻿using MusicDLP;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
-using MusicDLP.ViewModel.Helpers;
 
-namespace MusicDLP
+namespace MusicDLP_WinForms
 {
     public partial class OptionsForm : Form
     {
@@ -19,18 +18,18 @@ namespace MusicDLP
 
         public void LoadAllSettings()
         {
-            cbShowOutputConsole.Checked = (bool)Properties.Settings.Default["showConsoleOutput"];
-            cbClearPreviousOutput.Checked = (bool)Properties.Settings.Default["clearPreviousOutput"];
-            cbShowDownloadOutput.Checked = (bool)Properties.Settings.Default["showDownloadOutput"];
+            cbShowOutputConsole.Checked = PropertiesHelper.ShowConsoleOutput;
+            cbClearPreviousOutput.Checked = PropertiesHelper.ClearPreviousOutput;
+            cbShowDownloadOutput.Checked = PropertiesHelper.ShowDownloadOutput;
         }
 
         public void SaveAllSettings()
         {
-            Properties.Settings.Default["showConsoleOutput"] = cbShowOutputConsole.Checked;
-            Properties.Settings.Default["clearPreviousOutput"] = cbClearPreviousOutput.Checked;
-            Properties.Settings.Default["showDownloadOutput"] = cbShowDownloadOutput.Checked;
+            PropertiesHelper.ShowConsoleOutput = cbShowOutputConsole.Checked;
+            PropertiesHelper.ClearPreviousOutput = cbClearPreviousOutput.Checked;
+            PropertiesHelper.ShowDownloadOutput = cbShowDownloadOutput.Checked;
 
-            Properties.Settings.Default.Save();
+            PropertiesHelper.Save();
         }
 
         public void PreToolDownloadTasks()
