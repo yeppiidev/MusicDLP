@@ -1,0 +1,22 @@
+﻿<Window x:Class="MusicDLP_WPF.View.CustomDialogBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:i="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicDLP_WPF.View"
+        mc:Ignorable="d"
+        Title="Loading..."
+        Style="{StaticResource CustomWindowStyle}">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="Loading..." FontSize="72"/>
+        <TextBlock DockPanel.Dock="Top" Text="The dialog box is now loading its contents..."/>
+        <TextBlock DockPanel.Dock="Top" Text="Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed do eiusmod tempor"/>
+        <TextBlock DockPanel.Dock="Top" Text="incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"/>
+        <DockPanel>
+            <Button DockPanel.Dock="Right" Content="Cancel"/>
+            <Button DockPanel.Dock="Right" Content="Okay"/>
+            <Grid/>
+        </DockPanel>
+    </DockPanel>
+</Window>
