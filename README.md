@@ -1,5 +1,5 @@
 # MusicDLP
-A yt-dlp frontend (written in WinForms for Windows) for downloading MP3/M4As from YouTube/YouTube Music
+A yt-dlp frontend for downloading MP3/M4As from YouTube/YouTube Music (Windows only)
 
 # How to use?
 ## Installing the app
@@ -27,3 +27,6 @@ A yt-dlp frontend (written in WinForms for Windows) for downloading MP3/M4As fro
 
 ![image](https://user-images.githubusercontent.com/52355164/213846676-ed0a87e2-a61f-4a21-aea7-32ec9edfe9de.png)
 
+# Contributors
+- [yeppiidev](https://github.com/yeppiidev) (Project Author)
+- [DerekGooding](https://github.com/DerekGooding) (WPF Port)
